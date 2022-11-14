@@ -15,7 +15,7 @@
 <header>
     <nav>
         {% for page in site.pages %}
-        <a href="{{ page.url }}">
+        <a href="{{ page.url | relative_url}}">
             {% if page.title == null %}{{page.name | remove: ".md"}}{% else %}{{ page.title }}{% endif %}
         </a>
         {% endfor %}
