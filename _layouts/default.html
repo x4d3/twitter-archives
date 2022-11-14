@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    <style>
+        hr {
+            width: 75%;
+        }
+    </style>
+
+</head>
+<body>
+<header>
+    <nav>
+        {% for page in site.pages %}
+        <a href="{{ page.url }}">
+            {% if page.title == null %}{{page.name | remove: ".md"}}{% else %}{{ page.title }}{% endif %}
+        </a>
+        {% endfor %}
+    </nav>
+</header>
+{{ content }}
+</body>
+</html>
