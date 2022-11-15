@@ -2,9 +2,8 @@
 
 source "https://rubygems.org"
 
-# gem "rails"
-
 gem "jekyll", "~> 4.3"
 group :jekyll_plugins do
   gem 'jekyll-optional-front-matter'
+  gem 'jekyll-commonmark-ghpages'
 end

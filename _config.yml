@@ -2,6 +2,12 @@ baseurl: /twitter-archives
 
 plugins:
   - jekyll-optional-front-matter
+  - jekyll-commonmark-ghpages
+
+markdown: CommonMarkGhPages
+commonmark:
+  extensions:
+    - autolink
 
 defaults:
   -
