@@ -76,7 +76,7 @@ def tweet_json_to_markdown(tweet, username, archive_media_folder, output_media_f
                             media_url = f'{output_media_folder_name}{os.path.split(media_filename)[-1]}'
                             if not os.path.isfile(media_url):
                                 shutil.copy(media_filename, media_url)
-                            markdown += f'<video controls><source src="{media_url}">Your browser does not support the video tag.</video>\n{media_url}'
+                            markdown += f'<video controls width="600" height="450">\n<source src="{media_url}">Your browser does not support the video tag: <a src="{media_url}">{media_url}</a>\n</video>\n'
                     else:
                         print(f'Warning: missing local file: {local_filename}. Using original link instead: {original_url} (expands to {original_expanded_url})')
                         markdown += f'![]({original_url})'

@@ -6,8 +6,8 @@ plugins:
 
 markdown: CommonMarkGhPages
 commonmark:
-  extensions:
-    - autolink
+  options: ["UNSAFE", "SMART", "FOOTNOTES"]
+  extensions: ["strikethrough", "autolink", "table"]
 
 defaults:
   -
