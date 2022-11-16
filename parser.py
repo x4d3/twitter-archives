@@ -41,11 +41,12 @@ def extract_username(account_js_filename):
 def tweet_json_to_markdown(tweet, username, archive_media_folder, output_media_folder_name):
     """Converts a JSON-format tweet into markdown. Returns tuple of timestamp and markdown."""
     tweet = tweet['tweet']
-    timestamp_str = tweet['created_at']
-    timestamp = int(round(datetime.datetime.strptime(timestamp_str, '%a %b %d %X %z %Y').timestamp())) # Example: Tue Mar 19 14:05:17 +0000 2019
+    timestamp_str = tweet['created_at'] # Example: Tue Mar 19 14:05:17 +0000 2019
+    timestamp_date = datetime.datetime.strptime(timestamp_str, '%a %b %d %X %z %Y')
+    timestamp = int(round(timestamp_date.timestamp()))
     tweet_id_str = tweet['id_str']
-
-    body = f'[{timestamp_str}](https://twitter.com/{username}/status/{tweet_id_str})\n\n'
+    timestamp_formatted = timestamp_date.strftime("%a %b %d %H:%M:%S")
+    body = f'{timestamp_formatted}\n\n'
     body += tweet['full_text']
     # replace t.co URLs with their original versions
     if 'entities' in tweet and 'urls' in tweet['entities']:
@@ -76,7 +77,7 @@ def tweet_json_to_markdown(tweet, username, archive_media_folder, output_media_f
                             media_url = f'{output_media_folder_name}{os.path.split(media_filename)[-1]}'
                             if not os.path.isfile(media_url):
                                 shutil.copy(media_filename, media_url)
-                            markdown += f'<video controls width="600" height="450">\n<source src="{media_url}">Your browser does not support the video tag: <a src="{media_url}">{media_url}</a>\n</video>\n'
+                            markdown += f'<video controls width="600" height="450">\n<source src="{media_url}">Your browser does not support the video tag: <a href="{media_url}">{media_url}</a>\n</video>\n'
                     else:
                         print(f'Warning: missing local file: {local_filename}. Using original link instead: {original_url} (expands to {original_expanded_url})')
                         markdown += f'![]({original_url})'
